@@ -1,0 +1,26 @@
+https://www.codingninjas.com/codestudio/problems/find-duplicate-in-array_8230816?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+int findDuplicate(vector<int> &arr, int n){
+	
+  //linked list method
+	int slow=arr[0];
+	int fast=arr[0];
+	
+  //find point of collision
+	do{
+	   slow=arr[slow];
+	   fast=arr[arr[fast]];	
+	}while(slow!=fast);
+
+	fast=arr[0];
+	
+  //find duplicate node where they meet
+   while(fast!=slow){
+	  	slow=arr[slow];
+	  	fast=arr[fast];
+	}
+	return slow;
+}
+
+TC - O(N)
+SC - O(1)
