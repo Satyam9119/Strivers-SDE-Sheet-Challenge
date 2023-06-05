@@ -1,0 +1,18 @@
+https://www.codingninjas.com/codestudio/problems/modular-exponentiation_8230803?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+int modularExponentiation(int x, int n, int m) {
+	// pow(x,n)%m;
+
+	//base case
+	if(n==0 || x==1)
+	  return 1%m;
+	
+	long long smallPart = modularExponentiation(x, n/2, m)%m;
+	long long ans = (smallPart%m * smallPart%m )%m;
+	if(n&1)  ans=((ans%m)*(x%m))%m;
+	ans = max(ans%m, (ans+m)%m);   // considering when x is negative case also
+	return ans;
+}
+
+TC - O(N)
+SC - O(N)
