@@ -1,0 +1,32 @@
+https://www.codingninjas.com/codestudio/problems/count-subarrays-with-given-xor_8230830?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+int subarraysXor(vector<int> &arr, int target){
+    int n=arr.size();
+    unordered_map<int,int>mp;
+    int cnt=0, xorr=0;
+    for(int i=0;i<n;i++){
+        xorr=xorr^arr[i];
+        
+        if (xorr == target) {
+          cnt++;
+        }
+        
+        // if target^y = xorr => y=xorr^target;
+        
+        int y=xorr^target;
+        
+        if (mp.find(y) != mp.end()) {
+          cnt += mp[y];
+        }
+        
+        mp[xorr]++;
+    }
+    return cnt;
+}
+
+TC - O(N)
+SC - O(1)
+
+//ORDERED MAP - O(LOGN)
+//UNORDERED MAP - O(1)
+
