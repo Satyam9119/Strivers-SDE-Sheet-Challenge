@@ -1,0 +1,17 @@
+https://www.codingninjas.com/codestudio/problems/pascal-s-triangle_8230805?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+vector<vector<long long int>> printPascal(int n) 
+{
+  vector<vector<long long int>>dp(n);
+  for(int i=0;i<n;i++){
+    dp[i].resize(i+1);
+    dp[i][0]=1;
+    dp[i][i]=1;
+    for(int j=1;j<i;j++)
+      dp[i][j]=dp[i-1][j-1]+dp[i-1][j];
+  }
+  return dp;
+}
+
+TC - O(N*N)
+SC - O(N*N)
