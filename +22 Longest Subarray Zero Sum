@@ -1,0 +1,27 @@
+https://www.codingninjas.com/codestudio/problems/longest-subarray-zero-sum_8230747?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+int LongestSubsetWithZeroSum(vector<int>arr) {
+    int n=arr.size();
+    int sum=0, maxm=0;
+    unordered_map<int,int>mp;
+    for(int i=0;i<n;i++){
+      sum+=arr[i];
+      if(sum==0)
+        maxm=i+1;
+      else if(mp.find(sum)!=mp.end()){
+        int currlen=i-mp[sum];
+        maxm=max(maxm,currlen);
+      }
+      //update tabhi kro agar na ho wrna jita less indx hai utna faida milega 
+      else mp[sum]=i;
+    }  
+    return maxm;
+}
+
+TC - O()
+SC - O(N)
+
+//Map operations have an average time complexity of O(Log n), while an 
+//unordered_map in C++ has an average time complexity of O(1).
+
+  
