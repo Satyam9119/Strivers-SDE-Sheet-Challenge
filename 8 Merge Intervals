@@ -1,0 +1,20 @@
+https://www.codingninjas.com/codestudio/problems/merge-intervals_8230700?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+vector<vector<int>> mergeIntervals(vector<vector<int>> &vec)
+{ 
+     vector<vector<int>> ans;
+     if(vec.size()==0)
+        return ans;
+     sort(vec.begin(),vec.end());
+     vector<int>temp=vec[0];
+     for(auto x: vec){
+         if(x[0]<=temp[1])   //curr strt tym is less than previous end tym 
+           temp[1]=max(x[1],temp[1]);
+         else{
+             ans.push_back(temp);
+             temp=x;
+         }
+     }
+     ans.push_back(temp);
+     return ans;
+}
