@@ -1,0 +1,47 @@
+https://www.codingninjas.com/codestudio/problems/missing-and-repeating-numbers_8230733?challengeSlug=striver-sde-challenge
+
+pair<int,int> missingAndRepeating(vector<int> &arr, int n){
+	
+	int xorr=0;
+	for(int i=0;i<n;i++){
+		xorr=xorr^arr[i];
+		xorr=xorr^(i+1);
+	}
+    
+	//xorr contains xor of miss & repeat nos 
+
+	int bitcnt=0;     //find bitPosition of first difference 
+	
+	while(1){
+		if( (xorr & (1<<bitcnt)) ==1)
+			break;
+		bitcnt++;
+	}
+    
+	//xorr elements on set(one) or unset(zero) side of arr[i] & original perm(i) 
+	int zero=0, one=0;
+	for(int i=0;i<n;i++){
+		if( (arr[i] & (1<<bitcnt)) ==0)  zero=zero^arr[i];
+		else  one=one^arr[i];
+	}
+	
+	for(int i=1;i<=n;i++){
+		if( (i & (1<<bitcnt) )==0)  zero=zero^i;
+		else one = one^i;
+	}
+    
+	//to confirm which is rep & miss cnt occ of all
+	//rep will occur two tyms
+	int cnt=0;
+	for(int i=0;i<n;i++)
+		if(arr[i]==zero) cnt++;
+	
+	//return missing repeating
+	
+	if(cnt==2)  return {one,zero};  //one is miss & zero rep
+	else return {zero,one};         
+	
+  
+  TC - O(N)
+  SC - O(1)
+}
