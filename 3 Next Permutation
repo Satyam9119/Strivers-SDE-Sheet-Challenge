@@ -1,0 +1,45 @@
+https://www.codingninjas.com/codestudio/problems/next-permutation_8230741?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+vector<int> nextPermutation(vector<int> &vec, int n)
+{
+    // find first decreasing drop index i i.e. a[i]<a[i+1]  
+    // find elem just greater than first drop index
+    // swap those indixes
+    // sort all index ele after from drop_index+1 to last
+    
+
+    //step 1 find first
+    int first=-1,second=-1;
+    for(int i=n-2;i>=0;i--){
+      if (vec[i] < vec[i + 1]) {
+        first = i;
+        break;
+      }
+    }
+
+    // if already sorted in decreasing order, first remains -1, just reverse
+    if (first == -1){
+       reverse(vec.begin(), vec.end());
+       return vec;
+    }
+    
+    //step 2 find second indx just greater thn first
+    for(int i=n-1;i>=0;i--){
+        if(vec[i]>vec[first]){
+            second=i;
+            break;
+        }
+    }
+
+    //step 3 swap first & second;
+
+    swap(vec[first],vec[second]);
+
+    //step 4 sort from first+1 till last
+
+    sort(vec.begin()+first+1,vec.end());
+    return vec;
+}
+
+TC - O(Nlog N) + o(n) + o(n) + o(n) == o(n log n)
+SC - 1
