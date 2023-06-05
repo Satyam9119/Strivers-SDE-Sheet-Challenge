@@ -1,0 +1,26 @@
+https://www.codingninjas.com/codestudio/problems/search-in-a-2d-matrix_8230773?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+bool searchMatrix(vector<vector<int>>& mat, int target) {
+    int n=mat.size();
+    int m=mat[0].size();
+
+    int low=0, high=m*n-1;
+
+    while(low<=high){
+        int mid=low+(high-low)/2;
+        //m-col nos for horizontally sorted
+        //n-row nos for vertically sorted
+        //
+        int r=mid/m;   //divide for row
+        int c=mid%m;   //mod for col
+        if(mat[r][c]==target)
+           return true;
+        else if(mat[r][c]<target)
+           low=mid+1;
+        else 
+           high=mid-1;
+    }   
+    return false;
+}
+TC - O(log(M*N))
+SC - O(1)
