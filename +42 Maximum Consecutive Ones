@@ -1,0 +1,22 @@
+https://www.codingninjas.com/codestudio/problems/maximum-consecutive-ones_8230736?challengeSlug=striver-sde-challenge
+
+int longestSubSeg(vector<int> &nums , int n, int k){
+    // Write your code here.
+        int ans=0;
+        int l=0,r=0,z=0;
+        while(r<n){
+            if(nums[r]==0)
+                z++;
+            while(z>k){
+                if(nums[l]==0)
+                    z--;
+                l++;
+            }
+            ans = max(ans,r-l+1);
+            r++;
+        }
+        return ans;  
+}
+
+TC - O(N)
+SC - O(1)
