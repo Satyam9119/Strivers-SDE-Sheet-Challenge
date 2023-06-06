@@ -1,0 +1,26 @@
+https://www.codingninjas.com/codestudio/problems/k-th-permutation-sequence_8230822?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+string kthPermutation(int n, int k) {
+    vector<int> numbers;
+    int fact = 1;
+    for (int i = 1; i <= n; i++) {
+        fact = fact * i;
+        numbers.push_back(i);
+    }
+    fact /= n; // making the boxes of size 24 / 4
+    string ans;
+    k = k - 1;  // 0 based indexing
+    while(true){
+        ans += to_string( numbers[k/fact]);
+        numbers.erase(numbers.begin()+k/fact);
+        if(numbers.size() == 0){
+            break;
+        }
+        k = k % fact;
+        fact = fact / numbers.size();
+    }
+    return ans; 
+}
+
+TC - O(N)
+SC - O(N)
