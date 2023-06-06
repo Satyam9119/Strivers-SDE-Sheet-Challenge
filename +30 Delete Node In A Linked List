@@ -1,0 +1,24 @@
+https://www.codingninjas.com/codestudio/problems/delete-node-in-a-linked-list_8230813?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+
+//delete the node of a LL given the node to be deleted  
+void deleteNode(LinkedListNode<int> * node) {
+    if(node == NULL){
+        // Linked List is Empty
+        return;
+    }
+    
+    // Only one Element present or end of LL ko dlt krna hai
+    if(node->next == NULL){
+        node=NULL;
+        return;
+    }
+
+    node->data=node->next->data;
+    LinkedListNode<int> *temp=node->next;
+    node->next = temp->next;
+    delete temp;
+}
+
+TC - O(1)
+SC - O(1)
