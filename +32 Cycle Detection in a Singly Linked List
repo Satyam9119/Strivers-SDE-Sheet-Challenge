@@ -1,0 +1,26 @@
+https://www.codingninjas.com/codestudio/problems/cycle-detection-in-a-singly-linked-list_8230683?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+FLOYD'S CYCLE DETECTION ALGORITHM
+
+// agar slow aur fast meet krta hai to loop hoga wrna nahi 
+bool detectCycle(Node *head){
+        if(head==NULL)
+          return false; // 0 elements
+        
+        Node* fast = head;
+        Node* slow = head;
+        
+        while(fast!=NULL && slow!=NULL && fast->next!=NULL){
+            fast = fast->next->next;
+            slow = slow->next;
+            //loop detected
+            if(fast==slow){
+               return true;  
+            }
+        }
+        //no loop
+        return false;
+}
+
+TC - O(N)
+SC - 0(1)
