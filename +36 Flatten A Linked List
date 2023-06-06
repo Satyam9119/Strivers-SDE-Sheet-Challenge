@@ -1,0 +1,53 @@
+https://www.codingninjas.com/codestudio/problems/flatten-a-linked-list_8230827?challengeSlug=striver-sde-challenge
+
+// 2 nodes ke pair ko recursively merge sort krke return kro till no element left to merge sort 
+//merges two sorted linked list 
+Node* merge(Node* left, Node* right){
+       if(left == NULL) 
+          return right;
+       if(right == NULL)
+          return left;
+       
+       //Make a new node 
+       Node* ans = new Node(-1);
+       Node* temp = ans;
+
+       while(left != NULL && right != NULL){
+         if(left -> data <= right -> data){
+           temp -> child = left;
+           temp = left;
+           left = left -> child;
+         }
+         else{
+           temp -> child = right;
+           temp = right;
+           right = right -> child;
+         }
+       }
+
+       if(left != NULL){
+           temp -> child = left;
+           temp = left;
+           left = left -> child;
+        }
+
+       if(right != NULL){
+           temp -> child = right;
+           temp = right;
+           right = right -> child;
+         }
+
+         return ans -> child;
+}
+     
+Node* flattenLinkedList(Node* root){
+    if(root==NULL || root->next== NULL)
+        return root;
+     Node* down = root ;
+     Node* right = flattenLinkedList(root->next);
+     down->next = NULL;
+     return  merge( down , right); 
+}
+
+TC - O(sum of length of all nodes)
+SC - O(1)
