@@ -1,0 +1,23 @@
+https://www.codingninjas.com/codestudio/problems/day-13-print-permutations-string_8230703?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+//just swap in rearranging all permutations then swap again 
+void solve(string &str, int index, vector<string> &ans){
+    if (index == str.length()){
+        ans.push_back(str);
+        return;
+    }
+    for (int i = index; i < str.length(); i++){
+        swap(str[i],str[index]);
+        solve(str,index+1,ans);
+        swap(str[i],str[index]);
+    }
+}
+
+vector<string>findPermutations(string &str){
+    vector<string> ans;
+    solve(str,0,ans);
+    return ans;
+}
+
+TC - O(N)
+SC - O(N)
