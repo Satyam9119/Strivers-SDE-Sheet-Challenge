@@ -1,0 +1,27 @@
+https://www.codingninjas.com/codestudio/problems/3sum_8230739?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+vector<vector<int>> findTriplets(vector<int>nums, int n, int k) {
+	vector<vector<int>> res;
+    if(nums.size()<3) return res;
+    sort(nums.begin(), nums.end());
+    for (int i=0; i<nums.size(); i++) {
+        if ((i>0) && (nums[i]==nums[i-1]))
+            continue;
+        int l = i+1, r = nums.size()-1;
+        while (l<r) {
+            int s = nums[i]+nums[l]+nums[r];
+            if (s>k) r--;
+            else if (s<k) l++;
+            else {
+                res.push_back(vector<int> {nums[i], nums[l], nums[r]});
+                while (l<r && nums[l]==nums[l+1]) l++;
+                while (l<r && nums[r]==nums[r-1]) r--;
+                l++; r--;
+            }
+        }
+    }
+    return res;
+}
+
+TC - O(N LOGN)
+SC - O(N)
