@@ -1,0 +1,36 @@
+https://www.codingninjas.com/codestudio/problems/linked-list-cycle-ii_8230823?challengeSlug=striver-sde-challenge&leftPanelTab=1
+
+Node *firstNode(Node *head){
+
+    //0 element or 1 element => no cycle
+    if(head==NULL || head->next==NULL)
+        return NULL;
+
+    if(head->next->next==head)
+        return head;
+    
+    //check if loop exists
+    Node* slow=head;
+    Node* fast=head;
+    while(fast!=NULL && fast->next!=NULL){
+         fast=fast->next->next;
+         slow=slow->next;
+         if(slow==fast)
+            break;
+    }
+
+    if(slow!=fast)
+       return NULL;
+    
+    //find start of loop
+
+    slow=head;
+    while(slow!=fast){
+         slow=slow->next;
+         fast=fast->next;
+    }
+    return slow;    
+}
+
+TC - O(N)
+SC - O(1)
