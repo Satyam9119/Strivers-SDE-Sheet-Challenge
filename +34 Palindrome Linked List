@@ -1,0 +1,66 @@
+https://www.codingninjas.com/codestudio/problems/palindrome-linked-list_8230717?challengeSlug=striver-sde-challenge
+
+LinkedListNode<int> * getMid(LinkedListNode<int> * head){
+      LinkedListNode<int> * fast = head->next;  //even case me hed lene se galt ans aayega isliye head->next
+      LinkedListNode<int> * slow = head;
+      
+      while(fast!=NULL && fast->next!=NULL){
+          fast=fast->next->next;
+          slow=slow->next;
+      }
+      return slow;
+  }
+  
+  LinkedListNode<int> *reverseLL(LinkedListNode<int> * head){
+      LinkedListNode<int> * curr = head;
+      LinkedListNode<int> * prev = NULL;
+      LinkedListNode<int> * next = NULL;
+      
+      while(curr!=NULL){
+          next = curr->next;
+          curr->next = prev;
+          prev = curr;
+          curr = next; 
+      }
+      
+      return prev ;
+  }
+ 
+    bool isPalindrome(LinkedListNode<int> *head)
+    {
+        //base case 0 or 1 node linked list always a palindrome
+        if(head == NULL || head->next == NULL){
+            return true;
+        }
+        
+        //step-1 find the middle node;
+         LinkedListNode<int> * middle = getMid(head);
+         
+         //step -2 reverse the linked list after middle->next till end NULL 
+         
+         LinkedListNode<int> *temp = middle->next;
+         middle->next = reverseLL(temp);
+         
+         // step 3 check if head to middle and middle->next till end is equal
+         
+         LinkedListNode<int> * head1 = head;
+         LinkedListNode<int> * head2 = middle->next;
+         
+         while(head2!=NULL){
+             
+             if(head1->data!=head2->data) return false;
+             
+             head1 = head1->next;
+             head2 = head2->next;   
+         }
+         //step 4 rechange the old linked list
+         //optional step won't affect ur answer
+          temp = middle->next;
+          middle->next = reverseLL(temp);
+          
+          //it is palindrome since we completed the while loop
+          return true;         
+    } 
+    
+    TC - O(N)
+    SC - O(1)
