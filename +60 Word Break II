@@ -1,0 +1,35 @@
+https://www.codingninjas.com/codestudio/problems/word-break-ii_8230786?challengeSlug=striver-sde-challenge&leftPanelTab=0
+
+void solve(string str,vector<string>&res,unordered_set<string>&st,vector<string>&temp){
+        
+        //covered all cases reached end of str
+        if(str.length() == 0){
+            string ans;
+            for(auto it:temp){
+                 ans+= it + " ";
+            }
+            //remove lst unnecessary space
+            ans.pop_back();
+            res.push_back(ans);
+            return;
+        }
+
+        for(int i=0;i<str.length();i++){
+            if(st.count(str.substr(0, i+1))){
+                temp.push_back(str.substr(0, i+1));
+                solve(str.substr(i+1),res,st,temp);
+                //backtrack
+                temp.pop_back();
+            }
+        }
+    }
+
+vector<string> wordBreak(string &str, vector<string> &dictionary){
+    vector<string>res, temp;
+    unordered_set<string>st(dictionary.begin(), dictionary.end());    
+    solve(str,res,st,temp);
+    return res;
+}
+
+TC - O()
+SC - O()
