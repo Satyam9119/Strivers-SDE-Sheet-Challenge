@@ -1,0 +1,36 @@
+https://www.codingninjas.com/codestudio/problems/matrix-median_8230735?challengeSlug=striver-sde-challenge&leftPanelTab=1
+
+int countValuesGreaterThanMid(vector<vector<int>> &mat,int target,int i,int m){
+    int low=0, high=m-1;
+    while(low<=high){
+        int mid=low+(high-low)/2;
+        if(mat[i][mid]<=target)
+           low++;
+        else 
+           high--;
+    }
+    //count of all ele in this row hving val >target
+    return low;
+}
+ 
+int getMedian(vector<vector<int>> &mat)
+{
+    int n=mat.size();
+    int m=mat[0].size();
+    int low=1,high=1e9;
+    while(low<=high){
+        int mid=low+(high-low)/2;
+        int cnt=0;
+        //since rows are sorted so apply BS on each row
+        for(int i=0;i<n;i++){
+            cnt+=countValuesGreaterThanMid(mat,mid,i,m);
+        }
+        if(cnt<=(n*m)/2)
+           low=mid+1;
+        else 
+           high=mid-1;
+    }
+    return low;
+}
+TC - O(log(2^32)*N*logM) = O(32*N*logM)
+SC - O(1)
